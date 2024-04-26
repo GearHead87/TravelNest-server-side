@@ -32,10 +32,15 @@ async function run() {
         const countriesCollection = db.collection('countries');
         const touristSpotsCollection = db.collection('touristSpots');
 
+        app.get('/tourist-spots', async (req, res) => {
+            const cursor = touristSpotsCollection.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        })
 
-        app.post('/tourist-spots', async (req, res)=>{
+        app.post('/tourist-spots', async (req, res) => {
             const touristInfo = req.body;
-            console.log(touristInfo);
+            // console.log(touristInfo);
             const result = await touristSpotsCollection.insertOne(touristInfo);
             console.log(result);
             res.send(result);
