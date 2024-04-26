@@ -28,7 +28,18 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
 
-        // const userCollection = client.db("userDB").collection('users');
+        const db = client.db("TouristDB");
+        const countriesCollection = db.collection('countries');
+        const touristSpotsCollection = db.collection('touristSpots');
+
+
+        app.post('/tourist-spots', async (req, res)=>{
+            const touristInfo = req.body;
+            console.log(touristInfo);
+            const result = await touristSpotsCollection.insertOne(touristInfo);
+            console.log(result);
+            res.send(result);
+        })
 
         // app.get('/users', async (req, res) => {
         //     const cursor = userCollection.find();
@@ -88,7 +99,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Your Server is Running')
+    res.send('Your Server is Running');
 })
 
 app.listen(port, () => {
