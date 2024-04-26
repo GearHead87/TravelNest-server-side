@@ -38,11 +38,34 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/tourist-spots/:id', async (req, res) => {
+            const id = req.params.id;
+            // console.log(id);
+            const query = { _id: new ObjectId(id) };
+            const result = await touristSpotsCollection.findOne(query);
+            res.send(result);
+        })
+
+        app.get('/tourist-spots-user/:email', async(req, res)=>{
+            const userEmail = req.params.email;
+            const query = {email: userEmail}
+            const cursor = touristSpotsCollection.find(query)
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
         app.post('/tourist-spots', async (req, res) => {
             const touristInfo = req.body;
             // console.log(touristInfo);
             const result = await touristSpotsCollection.insertOne(touristInfo);
-            console.log(result);
+            // console.log(result);
+            res.send(result);
+        })
+
+        app.delete('/tourist-spots/:id', async(req, res)=>{
+            const id = req.params.id;
+            const query = {_id: new ObjectId(id)};
+            const result = await touristSpotsCollection.deleteOne(query);
             res.send(result);
         })
 
