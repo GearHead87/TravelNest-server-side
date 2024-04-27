@@ -40,7 +40,6 @@ async function run() {
 
         app.get('/tourist-spots/:id', async (req, res) => {
             const id = req.params.id;
-            // console.log(id);
             const query = { _id: new ObjectId(id) };
             const result = await touristSpotsCollection.findOne(query);
             res.send(result);
@@ -50,6 +49,20 @@ async function run() {
             const userEmail = req.params.email;
             const query = { email: userEmail }
             const cursor = touristSpotsCollection.find(query)
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
+        app.get('/countries', async (req, res) => {
+            const cursor = countriesCollection.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
+        app.get('/tourist-spots-country/:country_Name', async(req, res) =>{
+            const country_Name = req.params.country_Name;
+            const query = { country_Name: country_Name};
+            const cursor = touristSpotsCollection.find(query);
             const result = await cursor.toArray();
             res.send(result);
         })
