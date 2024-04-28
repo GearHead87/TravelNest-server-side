@@ -2,7 +2,7 @@
 
 Welcome to TravelNest Backend, powering the API for unforgettable travel experiences in Southeast Asia!
 
-Visit the live site: [TravelNest API](https://b9a10-travelnest-api.herokuapp.com/)
+Visit the live site: [TravelNest API](https://b9a10-travelnest.vercel.app/)
 
 ### Key Features
 - **RESTful API:** Built with Express.js and Node.js for robust and scalable backend services.
