@@ -45,6 +45,12 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/tourist-spots-sort/', async (req, res) => {
+            const cursor = touristSpotsCollection.find().sort({average_cost: 1}).collation({locale: "en_US", numericOrdering: true});
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
         app.get('/tourist-spots-user/:email', async (req, res) => {
             const userEmail = req.params.email;
             const query = { email: userEmail }
